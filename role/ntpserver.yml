@@ -1,0 +1,6 @@
+---
+- hosts: ntp-server
+  become: true
+  become_user: root
+  roles:
+    - role: ntpserver
