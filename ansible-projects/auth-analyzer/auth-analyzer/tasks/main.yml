@@ -6,7 +6,7 @@
 
 - name: copy sshrc file to hosts
   copy:
-    src: /home/ubuntu//projects/auth-analyzer/auth-analyzer/files/sshrc
+    src: "{{ playbook_dir }}/auth-analyzer/files/sshrc"
     dest: /etc/ssh/sshrc
 
 - name: create directory if they don't exist
@@ -21,7 +21,7 @@
 
 - name: Copy auth-analyzer script to hosts
   copy:
-     src: /home/ubuntu//projects/auth-analyzer/auth-analyzer/files/auth-analyzer.sh
+     src: "{{ playbook_dir }}/auth-analyzer/files/auth-analyzer.sh"
      dest: /home/ubuntu/techsupport/scripts/auth-analyzer.sh
 
 - cron:
