@@ -1,0 +1,7 @@
+---
+- name: install iptables-persistent
+  shell: apt-get update
+
+- name: install iptables-persistent
+  apt: pkg=iptables-persistent state=present
+

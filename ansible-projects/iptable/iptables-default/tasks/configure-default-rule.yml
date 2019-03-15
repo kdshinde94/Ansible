@@ -1,0 +1,15 @@
+---
+- name: Permit localhost to communicate with itself
+  shell: iptables -A INPUT -i lo -j ACCEPT
+
+- name: Permit already established connection traffic and related traffic
+  shell: iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+- name: Permit new SSH connections into the system from Anywhere
+  shell: iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
+
+- name: Permit all other traffic from trusted IP Address
+  shell: iptables -A INPUT -s 123.201.46.98 -j ACCEPT
+
+- name: Drop all other traffic
+  shell: iptables -P INPUT DROP && iptables -P FORWARD DROP

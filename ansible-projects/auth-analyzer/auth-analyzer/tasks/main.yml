@@ -1,0 +1,32 @@
+---
+# tasks file for auth-analyzer
+
+- name: Install heirloom-mailx
+  apt : pkg=heirloom-mailx state=present
+
+- name: copy sshrc file to hosts
+  copy:
+    src: /home/ubuntu//projects/auth-analyzer/auth-analyzer/files/sshrc
+    dest: /etc/ssh/sshrc
+
+- name: create directory if they don't exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0775
+  with_items:
+    - /home/ubuntu/techsupport/scripts
+
+- name: Copy auth-analyzer script to hosts
+  copy:
+     src: /home/ubuntu//projects/auth-analyzer/auth-analyzer/files/auth-analyzer.sh
+     dest: /home/ubuntu/techsupport/scripts/auth-analyzer.sh
+
+- cron:
+   name: "Set cron for auth-analyzer.sh"
+   minute: "0"
+   hour: "*"
+   job: "sh /home/ubuntu/techsupport/scripts/auth-analyzer.sh"
+

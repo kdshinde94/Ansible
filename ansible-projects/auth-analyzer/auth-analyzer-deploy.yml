@@ -1,0 +1,24 @@
+---
+#- hosts: hosts
+##  become: true
+# become_user: root
+#  roles:
+#  - auth-analyzer
+
+- hosts: 10.0.1.164
+  become: true
+  become_user: root
+  tasks:
+  - name: Replace Server name
+    replace:
+      path: "/etc/ssh/sshrc"
+      regexp: "Server_Name"
+      replace: "test2 (10.0.1.164)"
+
+  - name: Replace Server name
+    replace:
+      path: "/home/ubuntu/techsupport/scripts/auth-analyzer.sh"
+      regexp: "Server_Name"
+      replace: "test2 (10.0.1.164)"
+
+

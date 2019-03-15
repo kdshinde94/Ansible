@@ -1,0 +1,12 @@
+#Copy below script to file /etc/ssh/sshrc. Create the file sshrc if not already present.
+#Command in sshrc executes for every ssh login.
+#Below script will notify for every ssh login attempt and no. of current users. 
+
+ip=`echo $SSH_CONNECTION | cut -d " " -f 1`
+
+count=$(who --count)
+
+logger -t ssh-wrapper $USER login from $ip
+echo "User $USER just logged in from $ip\n\nFollowing users are currently logged in: $count" | mailx -s "Console login: Server_Name" -r "support@ridlr.in" -S smtp="email-smtp.us-east-1.amazonaws.com:587" -S smtp-use-starttls -S smtp-auth=login -S smtp-auth-user="AKIAJDDDPPAKFGNONIKA" -S smtp-auth-password="Ar3wOKPaH0BoOAdY9QU31cnvbx8eceu08EUiNiU1q1GR" -S ssl-verify=ignore kdshinde62@gmail.com
+
+

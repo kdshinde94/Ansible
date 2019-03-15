@@ -1,0 +1,4 @@
+---
+# tasks file for ansible-iptable
+- import_tasks: install-iptables-persistent.yml
+- import_tasks: configure-default-rule.yml
